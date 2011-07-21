@@ -1,0 +1,77 @@
+!!! 5
+html(lang="en")
+ head
+  title="Memory usage"
+
+  script(type="text/javascript",src="http://www.mynodejs.com:9000/socket.io/socket.io.js")
+  script(type="text/javascript",src="http://code.jquery.com/jquery-1.6.1.min.js")
+ body
+   script(type="text/javascript")
+    var socket = new io.Socket('80.70.3.128',{"port":'9000'})
+    socket.connect();
+    socket.on('connect',function() {});
+    socket.on('message',function(d) {
+         
+        var canvas = document.getElementById("test");
+        var data = eval( "(" + d + ")");
+        
+        var total =  data.heapUsed/data.heapTotal  
+        
+        var cxt = canvas.getContext("2d");
+        cxt.fillStyle = "#FFFFFF"
+        cxt.font = "bold 10px sans-serif"
+        cxt.fillRect(0,0,300,200)
+        cxt.fillStyle="#000000";       
+        cxt.fillText("HeapUsed: " + data.heapUsed,90,190); 
+        cxt.fillText("0%",10,190)
+        cxt.fillText("100%",10,20);
+        cxt.fillText(Math.floor(total*100)+"%",260,20);
+        Que.enqueue(total)
+        draw();  
+     });
+    
+     
+    socket.on('disconnect',function(){}); 
+    var Que = {}
+    Que.data = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
+    Que.isEmpty    = function ()  { return (Que.data.length == 0) }
+    Que.length = function ()  {return Que.data.length }
+    Que.enqueue    = function (obj) {Que.data.push(obj)}
+    Que.dequeue    = function ()  { return Que.data.shift()}
+    Que.peek       = function ()  { return data[0];}
+    Que.clear      = function ()  { data =[] }
+    Que.get 	  = function (i) { return data[i]}
+   
+    var draw = function () {
+     
+       var canvas = document.getElementById("test"); 
+       var cxt = canvas.getContext("2d");
+    
+       cxt.fillStyle = "red";
+       cxt.beginPath();
+       
+     
+      
+       
+       for(var i = 0;i < Que.data.length;i++)
+       {
+         
+          var px = Que.data[i]*200
+
+          cxt.lineTo(i*10,200-px);          
+          cxt.fillRect(10*i,200-px,5,5);
+       }
+      cxt.stroke();
+      Que.dequeue()
+    }
+
+    var init = function() {
+       console.log("draw");
+       draw(); 
+    } 
+   
+    $(function() {  init()  })
+      
+
+   
+  canvas#test(width="300",height="200",style="border:1px solid black;")
