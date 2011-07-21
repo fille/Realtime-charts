@@ -1,0 +1,14 @@
+
+
+Description: 
+
+This is a Realtime chart implementation in HTML5 using the canvas element
+Using the Node.js Heapstack as realtime data
+
+Dependency:
+
+Node.js
+	Socket.io 
+	express.js
+	jade.js
+	less.js
