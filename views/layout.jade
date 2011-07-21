@@ -3,11 +3,11 @@ html(lang="en")
  head
   title="Memory usage"
 
-  script(type="text/javascript",src="http://www.mynodejs.com:9000/socket.io/socket.io.js")
+  script(type="text/javascript",src="http://127.0.0.1:9000/socket.io/socket.io.js")
   script(type="text/javascript",src="http://code.jquery.com/jquery-1.6.1.min.js")
  body
    script(type="text/javascript")
-    var socket = new io.Socket('80.70.3.128',{"port":'9000'})
+    var socket = new io.Socket('127.0.0.1',{"port":'9000'})
     socket.connect();
     socket.on('connect',function() {});
     socket.on('message',function(d) {
