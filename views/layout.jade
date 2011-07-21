@@ -30,7 +30,6 @@ html(lang="en")
         draw();  
      });
     
-     
     socket.on('disconnect',function(){}); 
     var Que = {}
     Que.data = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
@@ -49,15 +48,10 @@ html(lang="en")
     
        cxt.fillStyle = "red";
        cxt.beginPath();
-       
-     
       
-       
        for(var i = 0;i < Que.data.length;i++)
        {
-         
           var px = Que.data[i]*200
-
           cxt.lineTo(i*10,200-px);          
           cxt.fillRect(10*i,200-px,5,5);
        }
@@ -71,7 +65,5 @@ html(lang="en")
     } 
    
     $(function() {  init()  })
-      
 
-   
   canvas#test(width="300",height="200",style="border:1px solid black;")
